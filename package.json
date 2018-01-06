@@ -45,6 +45,8 @@
     "react-fittext": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/runtime": "^7.0.0-beta.36",
+    "@mingshz/roadhog": "file:../roadhog",
     "babel-eslint": "^8.1.2",
     "babel-jest": "^22.0.4",
     "babel-plugin-dva-hmr": "^0.4.1",
@@ -75,7 +77,6 @@
     "pro-download": "^1.0.1",
     "react-test-renderer": "^16.2.0",
     "redbox-react": "^1.5.0",
-    "roadhog": "^2.0.3",
     "roadhog-api-doc": "^0.3.3",
     "rollbar": "^2.3.4",
     "stylelint": "^8.4.0",
