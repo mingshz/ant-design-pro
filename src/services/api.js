@@ -1,5 +1,5 @@
 import { stringify } from 'qs';
-import request from '../utils/request';
+import request, { normalRequest } from '../utils/request';
 
 export async function queryProjectNotice() {
   return request('/api/project/notice');
@@ -58,6 +58,24 @@ export async function queryAdvancedProfile() {
 
 export async function queryFakeList(params) {
   return request(`/api/fake_list?${stringify(params)}`);
+}
+
+async function realLogin(params) {
+  const formData = new FormData();
+
+  formData.append('username', params.userName);
+  formData.append('password', params.password);
+  return normalRequest('/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+    },
+    body: `username=${params.userName}&password=${params.password}`,
+  });
+}
+
+export async function accountLogin(params) {
+  return realLogin(params);
 }
 
 export async function fakeAccountLogin(params) {

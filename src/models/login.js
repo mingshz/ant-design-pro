@@ -1,4 +1,5 @@
-import { fakeAccountLogin } from '../services/api';
+import { accountLogin } from '../services/api';
+import { queryLoginStatus } from '../services/user';
 import { setAuthority } from '../utils/authority';
 
 export default {
@@ -9,12 +10,34 @@ export default {
   },
 
   effects: {
+    *refreshStatus(_, { put, call }) {
+      yield put({
+        type: 'refreshSubmitting',
+      });
+      // 这里开始运行了
+      const json = yield call(queryLoginStatus);
+      // 更新登录状态
+      if (Number.isInteger(json)) {
+        // 失败的登录
+        yield put({
+          type: 'changeLoginStatus',
+          payload: {
+            currentAuthority: 'guest',
+          },
+        });
+      } else {
+        yield put({
+          type: 'changeLoginStatus',
+          payload: json,
+        });
+      }
+    },
     *login({ payload }, { call, put }) {
       yield put({
         type: 'changeSubmitting',
         payload: true,
       });
-      const response = yield call(fakeAccountLogin, payload);
+      const response = yield call(accountLogin, payload);
       yield put({
         type: 'changeLoginStatus',
         payload: response,

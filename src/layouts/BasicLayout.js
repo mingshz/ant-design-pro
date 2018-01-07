@@ -88,6 +88,16 @@ class BasicLayout extends React.PureComponent {
     this.props.dispatch({
       type: 'user/fetchCurrent',
     });
+    this.refreshLoginStatus();
+    if (window) {
+      this.nextRefresh = window.setInterval(this.refreshLoginStatus, 30000);
+    }
+  }
+  componentWillUnmount() {
+    if (window && this.nextRefresh) {
+      window.clearInterval(this.nextRefresh);
+      this.nextRefresh = null;
+    }
   }
   getPageTitle() {
     const { routerData, location } = this.props;
@@ -97,6 +107,11 @@ class BasicLayout extends React.PureComponent {
       title = `${routerData[pathname].name} - Ant Design Pro`;
     }
     return title;
+  }
+  refreshLoginStatus() {
+    this.props.dispatch({
+      type: 'login/refreshStatus',
+    });
   }
   handleMenuCollapse = (collapsed) => {
     this.props.dispatch({

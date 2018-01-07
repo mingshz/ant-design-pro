@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Route } from 'dva/router';
 import DocumentTitle from 'react-document-title';
+import { connect } from 'dva';
 import { Icon } from 'antd';
 import GlobalFooter from '../components/GlobalFooter';
 import styles from './UserLayout.less';
@@ -21,6 +22,22 @@ const links = [{
 const copyright = <div>Copyright <Icon type="copyright" /> 2017 蚂蚁金服体验技术部出品</div>;
 
 class UserLayout extends React.PureComponent {
+  constructor() {
+    super();
+    this.refreshLoginStatus = this.refreshLoginStatus.bind(this);
+  }
+  componentDidMount() {
+    this.refreshLoginStatus();
+    if (window) {
+      this.nextRefresh = window.setInterval(this.refreshLoginStatus, 30000);
+    }
+  }
+  componentWillUnmount() {
+    if (window && this.nextRefresh) {
+      window.clearInterval(this.nextRefresh);
+      this.nextRefresh = null;
+    }
+  }
   getPageTitle() {
     const { routerData, location } = this.props;
     const { pathname } = location;
@@ -29,6 +46,11 @@ class UserLayout extends React.PureComponent {
       title = `${routerData[pathname].name} - Ant Design Pro`;
     }
     return title;
+  }
+  refreshLoginStatus() {
+    this.props.dispatch({
+      type: 'login/refreshStatus',
+    });
   }
   render() {
     const { routerData, match } = this.props;
@@ -63,4 +85,11 @@ class UserLayout extends React.PureComponent {
   }
 }
 
-export default UserLayout;
+// export default UserLayout;
+export default connect(state => ({
+  hello: state,
+  // currentUser: state.user.currentUser,
+  // collapsed: state.global.collapsed,
+  // fetchingNotices: state.global.fetchingNotices,
+  // notices: state.global.notices,
+}))(UserLayout);

@@ -15,4 +15,7 @@ npm-debug.log*
 
 /coverage
 .idea
+.mock
+.vscode
+package-lock.json
 yarn.lock
