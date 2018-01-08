@@ -57,10 +57,18 @@ export default function request(url, options) {
   return fetch(url, newOptions)
     .then(checkStatus)
     .then((response) => {
+      const type = response.headers.get('Content-Type');
+      if (type && type.indexOf('application/json') !== -1) {
+        return response.json();
+      }
       if (newOptions.method === 'DELETE' || response.status === 204) {
         return response.text();
       }
-      return response.json();
+      // try {
+      //   return response.json();
+      // } catch (e) {
+      return response.text();
+      // }
     });
 }
 

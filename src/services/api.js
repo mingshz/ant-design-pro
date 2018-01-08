@@ -74,6 +74,10 @@ async function realLogin(params) {
   });
 }
 
+export async function accountLogout() {
+  return request('/logout');
+}
+
 export async function accountLogin(params) {
   return realLogin(params);
 }

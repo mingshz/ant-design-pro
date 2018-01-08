@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route } from 'dva/router';
+import { Link, Route, Redirect } from 'dva/router';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
 import { Icon } from 'antd';
@@ -53,7 +53,10 @@ class UserLayout extends React.PureComponent {
     });
   }
   render() {
-    const { routerData, match } = this.props;
+    const { routerData, match, authority } = this.props;
+    if (authority && authority !== 'guest') {
+      return <Redirect exact to="/" />;
+    }
     return (
       <DocumentTitle title={this.getPageTitle()}>
         <div className={styles.container}>
@@ -87,7 +90,7 @@ class UserLayout extends React.PureComponent {
 
 // export default UserLayout;
 export default connect(state => ({
-  hello: state,
+  authority: state.login.authority,
   // currentUser: state.user.currentUser,
   // collapsed: state.global.collapsed,
   // fetchingNotices: state.global.fetchingNotices,

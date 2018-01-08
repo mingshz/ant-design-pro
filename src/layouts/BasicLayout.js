@@ -69,6 +69,10 @@ class BasicLayout extends React.PureComponent {
     location: PropTypes.object,
     breadcrumbNameMap: PropTypes.object,
   }
+  constructor() {
+    super();
+    this.refreshLoginStatus = this.refreshLoginStatus.bind(this);
+  }
   state = {
     isMobile,
   };
