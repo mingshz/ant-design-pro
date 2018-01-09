@@ -6,8 +6,14 @@ export async function listUsers(params) {
   return request(`/users?${stringify(params)}`);
 }
 
-export async function postExample(params) {
-  return request('/api/post', {
+export async function removeUser(id) {
+  return request(`/users/${id}`, {
+    method: 'DELETE',
+  });
+}
+
+export async function addUser(params) {
+  return request('/users', {
     method: 'POST',
     body: params,
   });

@@ -67,7 +67,7 @@ export default function request(url, options) {
       // try {
       //   return response.json();
       // } catch (e) {
-      return response.text();
+      return response;
       // }
     });
 }

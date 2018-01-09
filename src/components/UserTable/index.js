@@ -56,7 +56,7 @@ export default class UserTable extends PureComponent {
         title: '操作',
         render: (_, record) => (
           <Fragment>
-            <a onClick={doDelete(record ? record.id : null)}>配置</a>
+            <a onClick={doDelete(record ? record.id : null)}>删除</a>
             {/* <Divider type="vertical" />
             <a href="">订阅警报</a> */}
           </Fragment>
