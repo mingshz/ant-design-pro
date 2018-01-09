@@ -1,6 +1,6 @@
 import React from 'react';
 import PromiseRender from './PromiseRender';
-import { CURRENT } from './index';
+import { getCurrent } from './index';
 /**
  * 通用权限检查方法
  * Common check permissions method
@@ -56,7 +56,7 @@ const checkPermissions = (authority, currentAuthority, target, Exception) => {
 export { checkPermissions };
 
 const check = (authority, target, Exception) => {
-  return checkPermissions(authority, CURRENT, target, Exception);
+  return checkPermissions(authority, getCurrent(), target, Exception);
 };
 
 export default check;

@@ -49,7 +49,7 @@ export default class Users extends PureComponent {
               required="true"
               label="用户名"
             >
-              {getFieldDecorator('loginName', {
+              {getFieldDecorator('username', {
                 rules: [
                   {
                     required: true,

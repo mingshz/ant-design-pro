@@ -46,7 +46,7 @@ export default class UserTable extends PureComponent {
       },
       {
         title: '登录名',
-        dataIndex: 'loginName',
+        dataIndex: 'username',
       },
       {
         title: '角色',
