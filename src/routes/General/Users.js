@@ -95,7 +95,7 @@ export default class Users extends PureComponent {
                   }],
               })(
                 <Radio.Group>
-                  <Radio.Button value="user">用户</Radio.Button>
+                  {/* <Radio.Button value="user">用户</Radio.Button> */}
                   <Radio.Button value="developer">开发者</Radio.Button>
                   <Radio.Button value="manager">管理员</Radio.Button>
                 </Radio.Group>
