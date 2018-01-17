@@ -1,3 +1,5 @@
 module.exports = {
-  localApiFile: '../swagger-editor/src/plugins/common/_actions/common-api.json ',
+  projectId:'common-solution',
+  branch:'master'
+  // localApiFile: '../swagger-editor/src/plugins/common/_actions/common-api.json',
 };
